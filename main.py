@@ -59,7 +59,7 @@ with col1:
         ('Children birthday', 'Adult birthday', 'Conmpany event', 'Public sector event', 'Wedding', 'Other'))
     
 def get_hobby():
-    input_text = st.text_input(label=Customers main hobby", key="hobby_input")
+    input_text = st.text_input(label="Customers main hobby", key="hobby_input")
     return input_text
 
 hobby_input = get_hobby()
