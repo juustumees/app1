@@ -7,13 +7,13 @@ import os
 template = """
  You are a marketing copywriter with 20 years of experience. You are analyzing customer's background to write personalized product description that only this customer will receive; 
     PRODUCT input text: {content};
-    CUSTOMER age group (y): {agegroup};
+    CUSTOMER consumer segment (y): {consumersegment};
     CUSTOMER main xyz: {xyz};
-    TASK: Write a product description that is tailored into this customer's Age group and xyz. Use age group specific slang.;
+    TASK: Write a product description that is tailored into this consumer segment and xyz. Use consumer segement specific slang.;
     FORMAT: Present the result in the following order: (PRODUCT DESCRIPTION), (BENEFITS), (USE CASE);
     PRODUCT DESCRIPTION: describe the product in 5 sentences;
-    BENEFITS: describe in 3 sentences why this product is perfect considering customers age group and xyz;
-    USE CASE: write a story in 5 sentences, of an example weekend activity taking into account xyz {xyz} and age {agegroup}, write a story in first person, example "I started my Saturday morning with ...";
+    BENEFITS: describe in 3 sentences why this product is perfect considering consumer segment and xyz;
+    USE CASE: write a story in 5 sentences, of an example weekend activity taking into account xyz {xyz} and consumer segment {consumersegment}, write a story in first person, example "I started my Saturday morning with ...";
 """
 
 prompt = PromptTemplate(
@@ -27,18 +27,18 @@ def load_LLM(openai_api_key):
     llm = OpenAI(model_name='gpt-3.5-turbo-instruct', temperature=.7, openai_api_key=openai_api_key)
     return llm
 
-st.set_page_config(page_title="Customer tailored content", page_icon=":robot:")
+st.set_page_config(page_title="Consumer tailored content", page_icon=":robot:")
 st.header("Personaliseeritud turundusteksti konverter")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("Otstarve: tootetutvustustekstide personaliseerimine igale kliendile või kliendigruppidele; väljundtekst on kohandatud kliendi a) vanuserühmaga ja b) hobbitegevusega; sisendtekstiks on neutraalses vormis tootekirjeldus. \
-    \n\n Kasutusjuhend: 1) valmista ette tootekirjeldus (sisendtekst). 2) määra tarbijasegemendid lähtuvalt vanuserühma ja hobbide kombinatsioonidest. 3) sisesta ükshaaval tarbijasegmentide lõikes eeltoodud info äpi kasutajaliideses, saada ära. \
+    st.markdown("Otstarve: tootetutvustustekstide personaliseerimine igale kliendile või kliendigruppidele; väljundtekst on kohandatud kliendi a) tarbija segmenti ja b) ürituse temaatikaga; sisendtekstiks on neutraalses vormis tootekirjeldus. \
+    \n\n Kasutusjuhend: 1) valmista ette tootekirjeldus (sisendtekst). 2) määra tarbijasegemendid lähtuvalt tarbija segmendist ja ürituse temaatikast. 3) sisesta ükshaaval tarbijasegmentide lõikes eeltoodud info äpi kasutajaliideses, saada ära. \
     4) kopeeri ükshaaval tarbijasegmentide lõikes äpi väljundteksti kõnealuse toote tutvustuslehele.")
 
 with col2:
-    st.image(image='companylogo.jpg', caption='Natural and healthy shirts for everybody')
+    st.image(image='logo.jpg', caption=' We help to build your dream events')
 
 st.markdown("## Enter Your Content To Convert")
 
@@ -55,8 +55,8 @@ openai_api_key = get_api_key()
 col1, col2 = st.columns(2)
 with col1:
     option_agegroup = st.selectbox(
-        'Which age group would you like your content to target?',
-        ('9-15', '16-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80-100'))
+        'What is the purpose of the event, you would like us to offer catering?',
+        ('Laste sünnipäev', 'Täiskasvanu sünnipäev', 'Ettevõtte/Äri catering', 'Avalik sektor', 'Pulm'))
     
 def get_hobby():
     input_text = st.text_input(label="Customers xyz", key="hobby_input")
@@ -76,7 +76,7 @@ if len(content_input.split(" ")) > 700:
 
 def update_text_with_example():
     print ("in updated")
-    st.session_state.content_input = "t shirts, all clolors, cotton, responsible manufacturing"
+    st.session_state.content_input = "Catering, all themes, sustainable food"
 
 st.button("*GENERATE TEXT*", type='secondary', help="Click to see an example of the content you will be converting.", on_click=update_text_with_example)
 
