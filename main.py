@@ -9,10 +9,10 @@ template = """
     PRODUCT input text: {content};
     CUSTOMER consumer segment(y): {agegroup};
     CUSTOMER main xyz: {xyz};
-    TASK: Write a product description that is tailored into this consumer segement and theme. Use customer segement specific slang.;
+    TASK: Write a product description that is tailored into this consumer segment and hobby. Use customer segment specific slang.;
     FORMAT: Present the result in the following order: (PRODUCT DESCRIPTION), (BENEFITS), (USE CASE);
     PRODUCT DESCRIPTION: describe the product in 5 sentences;
-    BENEFITS: describe in 3 sentences why this product is perfect considering customers segment group and theme;
+    BENEFITS: describe in 3 sentences why this product is perfect considering customers segment group and hobby;
     USE CASE: write a story in 5 sentences, of an example weekend activity taking into account xyz {xyz} and segment {customersegment}, write a story in first person, example "I started my Saturday morning with ...";
 """
 
@@ -59,7 +59,7 @@ with col1:
         ('Children birthday', 'Adult birthday', 'Conmpany event', 'Public sector event', 'Wedding', 'Other'))
     
 def get_hobby():
-    input_text = st.text_input(label="Planned theme", key="hobby_input")
+    input_text = st.text_input(label=Customers main hobby", key="hobby_input")
     return input_text
 
 hobby_input = get_hobby()
