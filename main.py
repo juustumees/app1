@@ -8,16 +8,16 @@ template = """
  You are a marketing copywriter with 20 years of experience. You are analyzing customer's background to write personalized product description that only this customer will receive; 
     PRODUCT input text: {content};
     CUSTOMER consumer segment(y): {agegroup};
-    CUSTOMER main Hobby: {hobby};
+    CUSTOMER main xyz: {xyz};
     TASK: Write a product description that is tailored into this consumer segement and theme. Use customer segement specific slang.;
     FORMAT: Present the result in the following order: (PRODUCT DESCRIPTION), (BENEFITS), (USE CASE);
     PRODUCT DESCRIPTION: describe the product in 5 sentences;
     BENEFITS: describe in 3 sentences why this product is perfect considering customers segment group and theme;
-    USE CASE: write a story in 5 sentences, of an example weekend activity taking into account hobby {hobby} and segment {customersegment}, write a story in first person, example "I started my Saturday morning with ...";
+    USE CASE: write a story in 5 sentences, of an example weekend activity taking into account xyz {xyz} and segment {customersegment}, write a story in first person, example "I started my Saturday morning with ...";
 """
 
 prompt = PromptTemplate(
-    input_variables=["customersegment", "theme", "content"],
+    input_variables=["customersegment", "xyz", "content"],
     template=template,
 )
 
